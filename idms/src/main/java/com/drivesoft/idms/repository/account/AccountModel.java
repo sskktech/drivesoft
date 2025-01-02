@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 @Entity(name = "accounts")
-public class AccountEntity {
+public class AccountModel {
 
     @Id
     @Column(name="AccountNumber")
