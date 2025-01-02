@@ -9,9 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.validation.annotation.Validated;
+
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
@@ -45,22 +43,10 @@ public class IDMSController {
     String institutionID;
 
     @GetMapping("/Account/{AccountID}")
-    public AccountModel getAccountDetails(@RequestHeader("Authorization") String token, @PathVariable Integer AccountID) {
+    public AccountModel getAccount(@RequestHeader("Authorization") String token,
+                                          @RequestParam String userName, @PathVariable Integer AccountID) {
 
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-
-        if (!authentication.isAuthenticated()) {
-            throw new SecurityException(" Unauthorized access ");
-        }
-        // Extract the token (Remove 'Bearer ' prefix if present)
-        if (authentication != null && authentication.isAuthenticated()) {
-            String jwtToken = token.startsWith("Bearer ") ? token.substring(7) : token;
-
-            //user details validated against logged in user deatils
-            User user;
-            if (!securityService.validateToken(jwtToken, user)) {
-                throw new RuntimeException(" Unauthorized access ");
-            }
+        securityService.verifyLoggedInUserAuthentication(token,userName);
 
             // Fetch the account details from the database
             AccountModel account = new AccountModel();
@@ -71,18 +57,23 @@ public class IDMSController {
                 throw new RuntimeException(" Account not found. ");
             }
             return fetchedAccount;
-        }
     }
 
+
     @GetMapping("/Account/GetAccountList")
-    public List<AccountModel> getAccount() {
+    public List<AccountModel> getAccountList(@RequestHeader("Authorization") String token,
+                                         @RequestParam String userName) {
+        securityService.verifyLoggedInUserAuthentication(token,userName);
         return idmsService.getAccountList();
     }
 
     @PostMapping("/Create/Account")
-    public void saveOrUpdate(@RequestBody AccountModel account) {
+    public void saveOrUpdate(@RequestBody AccountModel account,@RequestHeader("Authorization") String token,
+                             @RequestParam String userName) {
+        securityService.verifyLoggedInUserAuthentication(token,userName);
         idmsService.saveOrUpdate(account);
     }
+
 
     @GetMapping("/authenticate/GetUserAuthorizationToken")
     public String getToken(@RequestBody User user) {

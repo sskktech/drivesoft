@@ -1,6 +1,14 @@
 # IDMS
 Below items can be found as part of this implementation. 
 
+#### Code clone
+clone from github url git@github.com:sskktech/drivesoft.git
+
+#### Code build and run
+mvn clean install
+mvn spring-boot:run
+
+
 ### User Login API idms/api/Login
 Which validates user and set authentication status in spring security context, so that user would be allowed to access further authenticated APIs.
 
@@ -17,7 +25,7 @@ Fetch the data from IDMS Accounts Information API
 Validates user details from the underlying database using spring security.
 
 ### Spring security for url's
-Allowed public url to get access token. Restricted protected urls. Once per request filter will validate for valid token having by the user.
+Allowed public url to get access token. Restricted protected urls. 
 
 
 

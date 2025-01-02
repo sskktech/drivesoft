@@ -25,12 +25,7 @@ public class IDMSServiceImpl implements IDMSService {
 
     @Override
     public AccountModel getAccount(AccountModel accountEntity) {
-        return accountDAO.getById(accountEntity);
-    }
-
-    @Override
-    public AccountDAO getAccountDAO() {
-        return accountDAO;
+        return accountDAO.findByAccountID(accountEntity.getAccountID());
     }
 
     public void saveOrUpdate(AccountModel accountEntity){

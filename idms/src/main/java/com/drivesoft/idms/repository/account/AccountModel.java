@@ -10,12 +10,14 @@ public class AccountModel {
     @Id
     @Column(name="AccountNumber")
     Integer AccountID;
+
     @Column
     String AccountStatus;
 
     @Transient
     private String AccountStatusDesc;
     Integer LoanNumber;
+
 
     String FirstName;
     String LastName;

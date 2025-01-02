@@ -5,5 +5,5 @@ import com.drivesoft.idms.repository.user.User;
 public interface SecurityService {
 
     String authenticateUser(User user);
-    Boolean validateToken(String token, User user);
+    void verifyLoggedInUserAuthentication(String token,String userName);
 }
