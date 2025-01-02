@@ -18,7 +18,7 @@ public class SecurityController {
     @Autowired
     private SecurityService securityService;
 
-    @PostMapping("/login")
+    @PostMapping("/Login")
     public String login(@RequestBody User user) {
         return securityService.authenticateUser(user);
     }
