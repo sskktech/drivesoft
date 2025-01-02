@@ -10,6 +10,6 @@ public interface AccountDAO extends JpaRepository<AccountEntity, Integer> {
     @Override
     List<AccountEntity> findAll();
 
-
-    //    void save(AccountEntity account);
+    @Override
+    AccountEntity save(AccountEntity entity);
 }

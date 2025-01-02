@@ -25,4 +25,9 @@ public class IDMSServiceImpl implements IDMSService {
 
        return accountList;
     }
+
+
+    public void saveOrUpdate(AccountEntity accountEntity){
+        accountDAO.save(accountEntity);
+    }
 }

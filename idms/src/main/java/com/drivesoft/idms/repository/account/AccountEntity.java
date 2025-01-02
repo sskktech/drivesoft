@@ -19,6 +19,17 @@ public class AccountEntity {
 
     String FirstName;
     String LastName;
+    String ContractSalesPrice;
+    String AccType;
+    String SalesGroupPerson1ID;
+    String ContractDate;
+    String CollateralStockNumber;
+    String CollateralYearModel;
+    String CollateralMake;
+    String CollateralModel;
+    String Borrower1FirstName;
+    String Borrower1LastName;
+
 
     // Lifecycle callback to set the status description after loading the entity
     @PostLoad

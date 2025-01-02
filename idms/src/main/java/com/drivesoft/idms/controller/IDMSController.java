@@ -35,15 +35,19 @@ public class IDMSController {
     @Value("${idms.institutionID}")
     String institutionID;
 
-    //need to modify get authorization token and pass it backend and fetch retrieval
+
     @GetMapping("/Account/GetAccountList")
-    public List<AccountEntity> getAccount(){
+    public List<AccountEntity> getAccount() {
         return idmsService.getAccountList();
     }
 
+    @PostMapping("/Create/Account")
+    void saveOrUpdate(AccountEntity accountEntity) {
+        idmsService.saveOrUpdate(accountEntity);
+    }
 
-        @GetMapping("/authenticate/GetUserAuthorizationToken")
-        public String getToken(){
+    @GetMapping("/authenticate/GetUserAuthorizationToken")
+    public String getToken() {
         String userTokenUri = "/api/authenticate/GetUserAuthorizationToken";
 
         // Define the URL with query parameters
@@ -53,17 +57,12 @@ public class IDMSController {
                 .append("&password=").append(password)
                 .append("&InstitutionId=").append(institutionID);
 
-        log.debug(" Url call for Token -->{} ",url);
+        log.debug(" Url call for Token -->{} ", url);
 
         ResponseEntity<String> responseEntity = restTemplate.getForEntity(url.toString(), String.class);
 
         return responseEntity.getBody();
     }
-
-
-
-
-
 
 
 }

@@ -7,4 +7,5 @@ import java.util.List;
 public interface IDMSService {
 
     List<AccountEntity> getAccountList();
+    void saveOrUpdate(AccountEntity accountEntity);
 }
