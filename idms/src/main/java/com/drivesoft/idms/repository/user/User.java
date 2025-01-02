@@ -10,7 +10,7 @@ import lombok.Data;
 public class User {
 
     @Id
-    @Column//(name = "username")
+    @Column
     private String username;
 
     @JsonIgnore

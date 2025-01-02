@@ -30,20 +30,4 @@ public class AccountModel {
     String Borrower1FirstName;
     String Borrower1LastName;
 
-
-    // Lifecycle callback to set the status description after loading the entity
-    @PostLoad
-    private void setAccountStatusDesc() {
-        this.AccountStatusDesc = mapAcctStatusDesc(this.AccountStatus);
-    }
-
-    // Utility method to map status code to description
-    private String mapAcctStatusDesc(String status) {
-        if ("a".equals(status)) {
-            return "active";
-        }
-        // Add more mappings as needed
-        return "inactive";
-    }
-
 }
